@@ -1,0 +1,40 @@
+{
+  "extends": [
+    "airbnb",
+    "plugin:import/errors",
+    "plugin:react/recommended"
+  ],
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "jest": true
+  },
+  "plugins": [
+    "babel",
+    "flowtype"
+  ],
+  "settings": {
+    "flowtype": {
+      "onlyFilesWithFlowAnnotation": true
+    }
+  },
+  "rules": {
+    "arrow-body-style": ["warn", "as-needed"],
+    "arrow-parens": "off",
+    "brace-style": ["warn", "stroustrup", { "allowSingleLine": true }],
+    "max-len": "off",
+    "react/jsx-filename-extension": "off",
+    "react/require-default-props": "off",
+    "react/sort-comp": [
+      "warn",
+      {
+        "order": [
+          "constructor",
+          "lifecycle",
+          "everything-else",
+          "render"
+        ]
+      }
+    ]
+  }
+}

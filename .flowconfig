@@ -1,0 +1,15 @@
+[ignore]
+
+[include]
+
+[libs]
+
+[untyped]
+
+[options]
+
+munge_underscores=true
+
+suppress_type=$FlowIssue
+suppress_type=$FlowFixMe
+suppress_type=$FixMe
