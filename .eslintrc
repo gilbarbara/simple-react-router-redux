@@ -24,6 +24,7 @@
     "brace-style": ["warn", "stroustrup", { "allowSingleLine": true }],
     "max-len": "off",
     "react/jsx-filename-extension": "off",
+    "react/forbid-prop-types": "off",
     "react/require-default-props": "off",
     "react/sort-comp": [
       "warn",
