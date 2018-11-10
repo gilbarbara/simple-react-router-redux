@@ -7,7 +7,7 @@ Redux bindings for react-router v4. A tiny fork of [connected-react-router](http
 ## Setup
 
 ```bash
-npm install connected-react-router
+npm install simple-react-router-redux
 ```
 
 ## Usage
