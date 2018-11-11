@@ -1,5 +1,4 @@
----
-version: "2"
+version: '2'
 checks:
   method-complexity:
     config:
@@ -10,7 +9,7 @@ checks:
 plugins:
   eslint:
     enabled: true
-    channel: "eslint-4"
+    channel: eslint-5
     checks:
       import/no-duplicates:
         enabled: false
@@ -28,4 +27,3 @@ exclude_patterns:
   - lib/**/*
   - node_modules/**/*
   - test/**/*
-
