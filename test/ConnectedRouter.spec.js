@@ -5,14 +5,15 @@ import Adapter from 'enzyme-adapter-react-16';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Route } from 'react-router';
-import {
-  applyMiddleware, createStore, compose, combineReducers,
-} from 'redux';
+import { applyMiddleware, createStore, compose, combineReducers } from 'redux';
 import { createBrowserHistory } from 'history';
 
 import * as actions from '../src/actions';
 import {
-  connectRouter, routerMiddleware, ConnectedRouter, LOCATION_CHANGE,
+  connectRouter,
+  routerMiddleware,
+  ConnectedRouter,
+  LOCATION_CHANGE,
 } from '../src';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -33,11 +34,7 @@ describe('ConnectedRouter', () => {
         router: connectRouter(history),
       }), // root reducer with router state
       {},
-      compose(
-        applyMiddleware(
-          routerMiddleware(history),
-        ),
-      ),
+      compose(applyMiddleware(routerMiddleware(history))),
     );
 
     wrapper = mount(

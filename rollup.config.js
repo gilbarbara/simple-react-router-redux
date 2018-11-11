@@ -16,7 +16,7 @@ const deps = [
 
 const external = id => deps.includes(id);
 
-const plugins = () => ([
+const plugins = () => [
   replace({
     'process.env.NODE_ENV': JSON.stringify('production'),
   }),
@@ -31,7 +31,7 @@ const plugins = () => ([
   commonjs(),
   filesize(),
   cleanup(),
-]);
+];
 
 export default [
   {
@@ -41,9 +41,6 @@ export default [
       { file: packageJSON.main, format: 'cjs' },
       { file: packageJSON.module, format: 'es' },
     ],
-    plugins: [
-      ...plugins(),
-      visualizer(),
-    ],
+    plugins: [...plugins(), visualizer()],
   },
 ];

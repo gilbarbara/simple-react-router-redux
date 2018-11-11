@@ -70,7 +70,8 @@ describe('Middleware', () => {
 
   it('passes to next middleware if action type is not CALL_HISTORY_METHOD', () => {
     const spy = jest.fn();
-    const nextMiddleware = store => next => action => { // eslint-disable-line no-unused-vars
+    // eslint-disable-next-line no-unused-vars
+    const nextMiddleware = store => next => action => {
       spy(action);
     };
     const history = {};

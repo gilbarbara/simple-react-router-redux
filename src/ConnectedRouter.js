@@ -27,7 +27,11 @@ class ConnectedRouter extends React.Component {
 
       // If we do time travelling, the location in store is changed but location in history is not changed
       /* istanbul ignore else */
-      if (pathnameInHistory !== pathnameInStore || searchInHistory !== searchInStore || hashInHistory !== hashInStore) {
+      if (
+        pathnameInHistory !== pathnameInStore ||
+        searchInHistory !== searchInStore ||
+        hashInHistory !== hashInStore
+      ) {
         this.inTimeTravelling = true;
         // Update history's location to match store's location
         history.push({
@@ -41,8 +45,7 @@ class ConnectedRouter extends React.Component {
     const handleLocationChange = (location, action) => {
       if (!this.inTimeTravelling) {
         onChanged(location, action);
-      }
-      else {
+      } else {
         this.inTimeTravelling = false;
       }
     };
@@ -77,11 +80,7 @@ class ConnectedRouter extends React.Component {
   render() {
     const { children, history } = this.props;
 
-    return (
-      <Router history={history}>
-        {children}
-      </Router>
-    );
+    return <Router history={history}>{children}</Router>;
   }
 }
 
@@ -91,7 +90,11 @@ const mapStateToProps = ({ router }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onLocationChanged: (location, action) => dispatch(onLocationChanged(location, action)),
+  onLocationChanged: (location, action) =>
+    dispatch(onLocationChanged(location, action)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ConnectedRouter);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ConnectedRouter);

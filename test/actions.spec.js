@@ -11,7 +11,10 @@ import {
 
 describe('Actions', () => {
   it('returns correct action when calling onLocationChanged()', () => {
-    const actualAction = onLocationChanged({ pathname: '/', search: '', hash: '' }, 'POP');
+    const actualAction = onLocationChanged(
+      { pathname: '/', search: '', hash: '' },
+      'POP',
+    );
     const expectedAction = {
       type: LOCATION_CHANGE,
       payload: {

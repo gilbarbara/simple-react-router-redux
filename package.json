@@ -71,6 +71,7 @@
     "enzyme-adapter-react-16": "^1.6.0",
     "eslint": "^5.8.0",
     "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^3.3.0",
     "eslint-plugin-babel": "^5.2.1",
     "eslint-plugin-flowtype": "^3.2.0",
     "eslint-plugin-import": "^2.14.0",
@@ -81,6 +82,7 @@
     "jest": "^23.6.0",
     "jest-enzyme": "^7.0.1",
     "lint-staged": "^8.0.4",
+    "prettier": "^1.15.2",
     "prop-types": "^15.6.2",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
@@ -102,18 +104,32 @@
     "build": "cross-env NODE_ENV=production rollup -c",
     "watch": "watch 'npm run build' src",
     "clean": "del lib es",
-    "lint": "eslint src",
+    "lint": "eslint src test",
+    "prettier": "prettier \"src/**/*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|graphql|mdx)\"",
+    "format": "npm run prettier -- --write",
+    "validate": "npm run lint && npm run prettier -- --list-different",
     "test": "jest --coverage",
     "test:watch": "jest --watch",
     "bundlesize": "bundlesize",
     "precommit": "lint-staged && npm run build && bundlesize",
     "prepublishOnly": "npm run build"
   },
+  "prettier": {
+    "trailingComma": "all",
+    "singleQuote": true,
+    "arrowParens": "avoid",
+    "printWidth": 80,
+    "proseWrap": "never"
+  },
   "lint-staged": {
     "linters": {
       "*.js": [
-        "eslint --fix",
+        "eslint --fix src test",
         "jest --bail --findRelatedTests"
+      ],
+      "**/*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|graphql|mdx)": [
+        "prettier --write one.js package.json foo.css",
+        "git add"
       ]
     }
   },

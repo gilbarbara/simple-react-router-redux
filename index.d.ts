@@ -6,7 +6,7 @@ declare module 'simple-react-router-redux' {
     Path,
     Location,
     LocationState,
-    LocationDescriptorObject
+    LocationDescriptorObject,
   } from 'history';
 
   interface ConnectedRouterProps {
@@ -21,8 +21,8 @@ declare module 'simple-react-router-redux' {
   }
 
   export interface RouterState {
-    location: Location
-    action: RouterActionType
+    location: Location;
+    action: RouterActionType;
   }
 
   export const LOCATION_CHANGE: '@@router/LOCATION_CHANGE';
@@ -56,10 +56,11 @@ declare module 'simple-react-router-redux' {
   export class ConnectedRouter extends React.Component<
     ConnectedRouterProps,
     {}
-    > {}
+  > {}
 
-  export function connectRouter(history: History)
-    : Reducer<RouterState, LocationChangeAction>
+  export function connectRouter(
+    history: History,
+  ): Reducer<RouterState, LocationChangeAction>;
 
   export function routerMiddleware(history: History): Middleware;
 }

@@ -2,7 +2,8 @@
   "extends": [
     "airbnb",
     "plugin:import/errors",
-    "plugin:react/recommended"
+    "plugin:react/recommended",
+    "prettier"
   ],
   "parser": "babel-eslint",
   "env": {
@@ -19,10 +20,6 @@
     }
   },
   "rules": {
-    "arrow-body-style": ["warn", "as-needed"],
-    "arrow-parens": "off",
-    "brace-style": ["warn", "stroustrup", { "allowSingleLine": true }],
-    "max-len": "off",
     "react/jsx-filename-extension": "off",
     "react/forbid-prop-types": "off",
     "react/require-default-props": "off",

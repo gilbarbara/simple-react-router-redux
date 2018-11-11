@@ -5,13 +5,15 @@ import { CALL_HISTORY_METHOD } from './actions';
  * provided history object. This will prevent these actions from reaching your
  * reducer or any middleware that comes after this one.
  */
-const routerMiddleware = (history) => () => next => action => {
+const routerMiddleware = history => () => next => action => {
   if (action.type !== CALL_HISTORY_METHOD) {
     next(action);
     return;
   }
 
-  const { payload: { method, args } } = action;
+  const {
+    payload: { method, args },
+  } = action;
   history[method](...args);
 };
 

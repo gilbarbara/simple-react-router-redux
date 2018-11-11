@@ -19,7 +19,7 @@ export const onLocationChanged = (location, action) => ({
  * look for actions of this type.
  */
 
-const updateLocation = (method) => (...args) => ({
+const updateLocation = method => (...args) => ({
   type: CALL_HISTORY_METHOD,
   payload: {
     method,
