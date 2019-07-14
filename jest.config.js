@@ -1,10 +1,4 @@
 module.exports = {
-  transform: {
-    '.*': 'babel-jest',
-  },
-  moduleFileExtensions: ['js', 'json'],
-  moduleDirectories: ['node_modules', 'src', './'],
-  testRegex: '/.*?\\.(test|spec)\\.js$',
   collectCoverage: false,
   collectCoverageFrom: ['src/**/*.js'],
   coverageThreshold: {
@@ -15,5 +9,8 @@ module.exports = {
       statements: 95,
     },
   },
-  verbose: true,
+  moduleDirectories: ['node_modules', 'src', './'],
+  moduleFileExtensions: ['js', 'json'],
+  testRegex: '/.*?\\.(test|spec)\\.js$',
+  transform: { '.*': 'babel-jest' },
 };

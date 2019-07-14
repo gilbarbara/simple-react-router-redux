@@ -24,10 +24,7 @@ const plugins = () => [
   babel({
     exclude: 'node_modules/**',
   }),
-  resolve({
-    jsnext: true,
-    main: true,
-  }),
+  resolve(),
   commonjs(),
   filesize(),
   cleanup(),
