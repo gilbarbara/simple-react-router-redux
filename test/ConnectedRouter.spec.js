@@ -2,9 +2,11 @@
 import { configure, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
+import { act } from 'react-dom/test-utils';
+
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Route } from 'react-router';
+import { Route } from 'react-router-dom';
 import { ReactReduxContext } from 'react-redux';
 import { applyMiddleware, createStore, compose, combineReducers } from 'redux';
 import { createBrowserHistory } from 'history';
@@ -75,50 +77,58 @@ describe('ConnectedRouter', () => {
     );
   });
 
-  describe('props.onLocationChanged', () => {
-    it('calls it on mount', () => {
-      expect(onLocationChangedSpy).toHaveBeenCalledTimes(1);
-    });
+  it('calls it on mount', () => {
+    expect(onLocationChangedSpy).toHaveBeenCalledTimes(1);
+  });
 
-    it('calls it when pathname changes.', () => {
+  it('calls it when pathname changes.', () => {
+    act(() => {
       history.push('/one');
-
-      expect(onLocationChangedSpy).toHaveBeenCalledTimes(2);
     });
 
-    it('calls it when search changes.', () => {
+    expect(onLocationChangedSpy).toHaveBeenCalledTimes(2);
+  });
+
+  it('calls it when search changes.', () => {
+    act(() => {
       history.push({ search: '?cache=11122' });
-
-      expect(store.getState().router.location.search).toBe('?cache=11122');
-      expect(onLocationChangedSpy).toHaveBeenCalledTimes(3);
     });
 
-    it('calls it when hash changes.', () => {
+    expect(store.getState().router.location.search).toBe('?cache=11122');
+    expect(onLocationChangedSpy).toHaveBeenCalledTimes(3);
+  });
+
+  it('calls it when hash changes.', () => {
+    act(() => {
       history.push({ hash: 'profile' });
-
-      expect(store.getState().router.location.hash).toBe('#profile');
-      expect(onLocationChangedSpy).toHaveBeenCalledTimes(4);
     });
 
-    it('calls it when state changes.', () => {
+    expect(store.getState().router.location.hash).toBe('#profile');
+    expect(onLocationChangedSpy).toHaveBeenCalledTimes(4);
+  });
+
+  it('calls it when state changes.', () => {
+    act(() => {
       history.push({ state: { modal: true } });
-
-      expect(store.getState().router.location.state).toEqual({ modal: true });
-      expect(onLocationChangedSpy).toHaveBeenCalledTimes(5);
     });
+
+    expect(store.getState().router.location.state).toEqual({ modal: true });
+    expect(onLocationChangedSpy).toHaveBeenCalledTimes(5);
   });
 
   it('calls `history.push()` when the store location differs from history', () => {
     expect(history.location.pathname).toBe('/one');
 
-    store.dispatch({
-      type: LOCATION_CHANGE,
-      payload: {
-        location: {
-          ...store.getState().router.location,
-          pathname: '/two',
+    act(() => {
+      store.dispatch({
+        type: LOCATION_CHANGE,
+        payload: {
+          location: {
+            ...store.getState().router.location,
+            pathname: '/two',
+          },
         },
-      },
+      });
     });
 
     expect(history.location.pathname).toBe('/two');

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Router } from 'react-router';
+import { Router } from 'react-router-dom';
 import { connect, ReactReduxContext } from 'react-redux';
 
 import { onLocationChanged } from './actions';
