@@ -16,11 +16,8 @@ describe('connectRouter', () => {
   });
 
   it('creates new root reducer with router reducer inside', () => {
-    const mockReducer = (state = {}, action) => {
-      switch (action.type) {
-        default:
-          return state;
-      }
+    const mockReducer = (state = {}) => {
+      return state;
     };
     const rootReducer = combineReducers({
       mock: mockReducer,

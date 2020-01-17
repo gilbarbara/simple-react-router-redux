@@ -1,11 +1,9 @@
 import babel from 'rollup-plugin-babel';
 import cleanup from 'rollup-plugin-cleanup';
 import commonjs from 'rollup-plugin-commonjs';
-import filesize from 'rollup-plugin-filesize';
 import flow from 'rollup-plugin-flow';
 import replace from 'rollup-plugin-replace';
 import resolve from 'rollup-plugin-node-resolve';
-import visualizer from 'rollup-plugin-visualizer';
 
 import packageJSON from './package.json';
 
@@ -26,7 +24,6 @@ const plugins = () => [
   }),
   resolve(),
   commonjs(),
-  filesize(),
   cleanup(),
 ];
 
@@ -38,6 +35,6 @@ export default [
       { file: packageJSON.main, format: 'cjs' },
       { file: packageJSON.module, format: 'es' },
     ],
-    plugins: [...plugins(), visualizer()],
+    plugins: plugins(),
   },
 ];
