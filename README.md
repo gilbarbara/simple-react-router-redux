@@ -2,7 +2,7 @@
 
 [![NPM version](https://badge.fury.io/js/simple-react-router-redux.svg)](https://www.npmjs.com/package/simple-react-router-redux) [![build status](https://travis-ci.org/gilbarbara/simple-react-router-redux.svg)](https://travis-ci.org/gilbarbara/simple-react-router-redux) [![Maintainability](https://api.codeclimate.com/v1/badges/c7e42fe511b80cc25760/maintainability)](https://codeclimate.com/github/gilbarbara/simple-react-router-redux/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/2fb41194cfedcefc7358/test_coverage)](https://codeclimate.com/github/gilbarbara/simple-react-router-redux/test_coverage)
 
-Redux bindings for react-router v4. A tiny fork of [connected-react-router](https://github.com/supasate/connected-react-router)
+Redux bindings for react-router. A tiny fork of [connected-react-router](https://github.com/supasate/connected-react-router)
 
 ## Setup
 
@@ -19,7 +19,6 @@ import { createBrowserHistory } from 'history';
 
 export default createBrowserHistory();
 ```
-
 
 And configure the store:
 
@@ -48,7 +47,6 @@ const store = createStore(
 );
 ```
 
-
 Now just wrap your routes with ConnectedRouter with the same history module
 
 ```jsx
@@ -66,20 +64,17 @@ ReactDOM.render(
     <ConnectedRouter history={history}>
       <div>
         <Switch>
-          <Route exact path="/" render={() => (<div>Match</div>)} />
-          <Route render={() => (<div>Miss</div>)} />
+          <Route exact path="/" render={() => <div>Match</div>} />
+          <Route render={() => <div>Miss</div>} />
         </Switch>
       </div>
     </ConnectedRouter>
   </Provider>,
-  document.getElementById('react')
+  document.getElementById('react'),
 );
 ```
 
-
-
 Enjoy!
-
 
 ## License
 
