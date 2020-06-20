@@ -87,8 +87,7 @@ const mapStateToProps = ({ router }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onLocationChanged: (location, action) =>
-    dispatch(onLocationChanged(location, action)),
+  onLocationChanged: (location, action) => dispatch(onLocationChanged(location, action)),
 });
 
 const ConnectedRouterWithContext = props => {
@@ -111,7 +110,4 @@ ConnectedRouterWithContext.propTypes = {
   context: PropTypes.object,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(ConnectedRouterWithContext);
+export default connect(mapStateToProps, mapDispatchToProps)(ConnectedRouterWithContext);
