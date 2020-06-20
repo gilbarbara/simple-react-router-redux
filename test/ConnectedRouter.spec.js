@@ -1,9 +1,4 @@
 /* eslint-disable import/no-named-default, react/no-unused-state */
-import { configure, mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-
-import { act } from 'react-dom/test-utils';
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
@@ -12,14 +7,7 @@ import { applyMiddleware, createStore, compose, combineReducers } from 'redux';
 import { createBrowserHistory } from 'history';
 
 import * as actions from '../src/actions';
-import {
-  connectRouter,
-  routerMiddleware,
-  ConnectedRouter,
-  LOCATION_CHANGE,
-} from '../src';
-
-configure({ adapter: new Adapter() });
+import { connectRouter, routerMiddleware, ConnectedRouter, LOCATION_CHANGE } from '../src';
 
 class MockProvider extends React.Component {
   constructor(props) {
@@ -41,11 +29,7 @@ class MockProvider extends React.Component {
     const { children } = this.props;
     const Context = ReactReduxContext;
 
-    return (
-      <Context.Provider value={this.state}>
-        {React.Children.only(children)}
-      </Context.Provider>
-    );
+    return <Context.Provider value={this.state}>{React.Children.only(children)}</Context.Provider>;
   }
 }
 

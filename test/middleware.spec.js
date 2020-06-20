@@ -1,6 +1,5 @@
 import configureStore from 'redux-mock-store';
-import routerMiddleware from '../src/middleware';
-import { CALL_HISTORY_METHOD } from '../src/actions';
+import { CALL_HISTORY_METHOD, routerMiddleware } from '../src';
 
 describe('Middleware', () => {
   it('calls history method based on action payload values', () => {
@@ -71,12 +70,12 @@ describe('Middleware', () => {
   it('passes to next middleware if action type is not CALL_HISTORY_METHOD', () => {
     const spy = jest.fn();
     // eslint-disable-next-line no-unused-vars
-    const nextMiddleware = store => next => action => {
+    const nextMiddleware = () => () => action => {
       spy(action);
     };
     const history = {};
-    const middlewares = [routerMiddleware(history), nextMiddleware];
-    const mockStore = configureStore(middlewares);
+    const middleware = [routerMiddleware(history), nextMiddleware];
+    const mockStore = configureStore(middleware);
     const store = mockStore();
     const action = {
       type: 'NOT_HANDLE_ACTION',

@@ -1,20 +1,17 @@
 import {
-  LOCATION_CHANGE,
   CALL_HISTORY_METHOD,
-  onLocationChanged,
-  push,
-  replace,
+  LOCATION_CHANGE,
   go,
   goBack,
   goForward,
-} from '../src/actions';
+  onLocationChanged,
+  push,
+  replace,
+} from '../src';
 
 describe('Actions', () => {
   it('returns correct action when calling onLocationChanged()', () => {
-    const actualAction = onLocationChanged(
-      { pathname: '/', search: '', hash: '' },
-      'POP',
-    );
+    const actualAction = onLocationChanged({ pathname: '/', search: '', hash: '' }, 'POP');
     const expectedAction = {
       type: LOCATION_CHANGE,
       payload: {

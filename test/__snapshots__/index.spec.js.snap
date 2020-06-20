@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`simple-react-router-redux should  1`] = `
+Object {
+  "CALL_HISTORY_METHOD": "@@router/CALL_HISTORY_METHOD",
+  "ConnectedRouter": Object {
+    "$$typeof": Symbol(react.memo),
+    "WrappedComponent": [Function],
+    "compare": null,
+    "displayName": "Connect(ConnectedRouterWithContext)",
+    "type": [Function],
+  },
+  "LOCATION_CHANGE": "@@router/LOCATION_CHANGE",
+  "connectRouter": [Function],
+  "go": [Function],
+  "goBack": [Function],
+  "goForward": [Function],
+  "onLocationChanged": [Function],
+  "push": [Function],
+  "replace": [Function],
+  "routerMiddleware": [Function],
+}
+`;
