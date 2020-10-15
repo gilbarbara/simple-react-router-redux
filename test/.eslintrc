@@ -1,9 +1,0 @@
-{
-  "globals": {
-    "act": true,
-    "mount": true
-  },
-  "rules": {
-    "no-console": "off"
-  }
-}

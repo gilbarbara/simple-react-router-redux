@@ -1,11 +1,11 @@
+import { createBrowserHistory } from 'history';
 import configureStore from 'redux-mock-store';
 import { CALL_HISTORY_METHOD, routerMiddleware } from '../src';
 
 describe('Middleware', () => {
   it('calls history method based on action payload values', () => {
     const history = {
-      location: {},
-      action: 'POP',
+      ...createBrowserHistory(),
       push: jest.fn(),
       replace: jest.fn(),
       go: jest.fn(),
@@ -70,10 +70,10 @@ describe('Middleware', () => {
   it('passes to next middleware if action type is not CALL_HISTORY_METHOD', () => {
     const spy = jest.fn();
     // eslint-disable-next-line no-unused-vars
-    const nextMiddleware = () => () => action => {
+    const nextMiddleware = () => () => (action: any) => {
       spy(action);
     };
-    const history = {};
+    const history = createBrowserHistory();
     const middleware = [routerMiddleware(history), nextMiddleware];
     const mockStore = configureStore(middleware);
     const store = mockStore();

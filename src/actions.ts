@@ -2,10 +2,16 @@
  * This action type will be dispatched when your history
  * receives a location change.
  */
+import { Action, LocationState } from 'history';
+import { LocationChangeAction, Methods, RouterLocation } from './types';
+
 export const LOCATION_CHANGE = '@@router/LOCATION_CHANGE';
 export const CALL_HISTORY_METHOD = '@@router/CALL_HISTORY_METHOD';
 
-export const onLocationChanged = (location, action) => ({
+export const onLocationChanged = <S = LocationState>(
+  location: RouterLocation<S>,
+  action: Action,
+): LocationChangeAction<S> => ({
   type: LOCATION_CHANGE,
   payload: {
     location,
@@ -18,8 +24,7 @@ export const onLocationChanged = (location, action) => ({
  * If you're writing a middleware to watch for navigation events, be sure to
  * look for actions of this type.
  */
-
-const updateLocation = method => (...args) => ({
+const updateLocation = (method: Methods) => (...args: any[]) => ({
   type: CALL_HISTORY_METHOD,
   payload: {
     method,

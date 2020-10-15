@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`simple-react-router-redux should  1`] = `
+exports[`simple-react-router-redux should have all exports 1`] = `
 Object {
   "CALL_HISTORY_METHOD": "@@router/CALL_HISTORY_METHOD",
   "ConnectedRouter": Object {

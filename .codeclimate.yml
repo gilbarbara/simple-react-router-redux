@@ -23,7 +23,7 @@ plugins:
         enabled: false
 exclude_patterns:
   - coverage/**/*
-  - es/**/*
+  - esm/**/*
   - lib/**/*
   - node_modules/**/*
   - test/**/*

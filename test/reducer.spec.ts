@@ -1,15 +1,18 @@
 import { combineReducers } from 'redux';
+import { createBrowserHistory, History } from 'history';
 import { LOCATION_CHANGE, connectRouter } from '../src';
 
 describe('connectRouter', () => {
-  let mockHistory;
+  let mockHistory: History;
 
   beforeEach(() => {
     mockHistory = {
+      ...createBrowserHistory(),
       location: {
         pathname: '/',
         search: '',
         hash: '',
+        state: {},
       },
       action: 'POP',
     };
@@ -76,7 +79,7 @@ describe('connectRouter', () => {
         action: 'POP',
       },
     };
-    const nextState = rootReducer(currentState);
+    const nextState = rootReducer(currentState, { type: 'TEST' });
 
     expect(nextState).toBe(currentState);
   });

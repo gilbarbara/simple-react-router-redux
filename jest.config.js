@@ -1,6 +1,6 @@
 module.exports = {
   collectCoverage: false,
-  collectCoverageFrom: ['src/**/*.js'],
+  collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}'],
   coverageThreshold: {
     global: {
       branches: 95,
@@ -9,12 +9,20 @@ module.exports = {
       statements: 95,
     },
   },
+  globals: {
+    'ts-jest': {
+      tsConfig: 'test/tsconfig.json',
+      diagnostics: {
+        ignoreCodes: [151001],
+      },
+    },
+  },
   moduleDirectories: ['node_modules', 'src', './'],
-  moduleFileExtensions: ['js', 'json'],
-  setupFiles: ['<rootDir>/test/__setup__/setupFiles.js'],
-  setupFilesAfterEnv: ['<rootDir>/test/__setup__/setupTests.js'],
-  testRegex: '/.*?\\.(test|spec)\\.js$',
-  transform: { '.*': 'babel-jest' },
+  moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx', 'json'],
+  setupFiles: ['<rootDir>/test/__setup__/setupFiles.ts'],
+  setupFilesAfterEnv: ['<rootDir>/test/__setup__/setupTests.ts'],
+  testRegex: '/.*?\\.(test|spec)\\.tsx?$',
+  transform: { '.*': 'ts-jest' },
   verbose: false,
   watchPlugins: ['jest-watch-typeahead/filename', 'jest-watch-typeahead/testname'],
 };

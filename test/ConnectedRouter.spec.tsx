@@ -1,43 +1,35 @@
-/* eslint-disable import/no-named-default, react/no-unused-state */
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { Route } from 'react-router-dom';
 import { ReactReduxContext } from 'react-redux';
-import { applyMiddleware, createStore, compose, combineReducers } from 'redux';
-import { createBrowserHistory } from 'history';
+import { applyMiddleware, combineReducers, compose, createStore, Store } from 'redux';
+import { createBrowserHistory, History } from 'history';
+import { mount, ReactWrapper } from 'enzyme';
+import { act } from 'react-dom/test-utils';
 
 import * as actions from '../src/actions';
-import { connectRouter, routerMiddleware, ConnectedRouter, LOCATION_CHANGE } from '../src';
+import { ConnectedRouter, connectRouter, LOCATION_CHANGE, routerMiddleware } from '../src';
 
-class MockProvider extends React.Component {
-  constructor(props) {
-    super(props);
-    const { store } = props;
+function MockProvider(props: any) {
+  const { children, store } = props;
+  const Context = ReactReduxContext;
 
-    this.state = {
-      storeState: store.getState(),
-      store,
-    };
-  }
-
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-    store: PropTypes.object.isRequired,
-  };
-
-  render() {
-    const { children } = this.props;
-    const Context = ReactReduxContext;
-
-    return <Context.Provider value={this.state}>{React.Children.only(children)}</Context.Provider>;
-  }
+  return (
+    <Context.Provider
+      value={{
+        storeState: store.getState(),
+        store,
+      }}
+    >
+      {React.Children.only(children)}
+    </Context.Provider>
+  );
 }
 
 describe('ConnectedRouter', () => {
-  let history;
-  let onLocationChangedSpy;
-  let store;
-  let wrapper;
+  let history: History;
+  let onLocationChangedSpy: any;
+  let store: Store;
+  let wrapper: ReactWrapper;
 
   beforeAll(() => {
     onLocationChangedSpy = jest.spyOn(actions, 'onLocationChanged');

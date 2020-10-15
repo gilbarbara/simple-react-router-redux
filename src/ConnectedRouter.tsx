@@ -1,12 +1,19 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { Router } from 'react-router-dom';
-import { connect, ReactReduxContext } from 'react-redux';
+import { connect, ReactReduxContext, ReactReduxContextValue } from 'react-redux';
+import { Dispatch } from 'redux';
+import { Action, Location } from 'history';
 
 import { onLocationChanged } from './actions';
 
-class ConnectedRouter extends React.Component {
-  constructor(props) {
+import { ConnectedRouterProps, RouterLocation, RouterRootState } from './types';
+
+class ConnectedRouter extends React.PureComponent<ConnectedRouterProps> {
+  inTimeTravelling: boolean;
+  unsubscribe: any;
+  unlisten: any;
+
+  constructor(props: ConnectedRouterProps) {
     super(props);
     const { history, onLocationChanged: onChanged, store } = this.props;
 
@@ -42,7 +49,7 @@ class ConnectedRouter extends React.Component {
       }
     });
 
-    const handleLocationChange = (location, action) => {
+    const handleLocationChange = (location: Location, action: Action) => {
       if (!this.inTimeTravelling) {
         onChanged(location, action);
       } else {
@@ -53,21 +60,6 @@ class ConnectedRouter extends React.Component {
     this.unlisten = history.listen(handleLocationChange);
     handleLocationChange(history.location, history.action);
   }
-
-  static propTypes = {
-    children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
-    history: PropTypes.shape({
-      action: PropTypes.string.isRequired,
-      listen: PropTypes.func.isRequired,
-      location: PropTypes.object.isRequired,
-      push: PropTypes.func.isRequired,
-    }).isRequired,
-    onLocationChanged: PropTypes.func.isRequired,
-    store: PropTypes.shape({
-      getState: PropTypes.func.isRequired,
-      subscribe: PropTypes.func.isRequired,
-    }).isRequired,
-  };
 
   componentWillUnmount() {
     this.unlisten();
@@ -81,16 +73,17 @@ class ConnectedRouter extends React.Component {
   }
 }
 
-const mapStateToProps = ({ router }) => ({
+const mapStateToProps = ({ router }: RouterRootState) => ({
   action: router.action,
   location: router.location,
 });
 
-const mapDispatchToProps = dispatch => ({
-  onLocationChanged: (location, action) => dispatch(onLocationChanged(location, action)),
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  onLocationChanged: (location: RouterLocation<any>, action: Action) =>
+    dispatch(onLocationChanged(location, action)),
 });
 
-const ConnectedRouterWithContext = props => {
+const ConnectedRouterWithContext = (props: any) => {
   const { context } = props;
   const Context = context || ReactReduxContext;
 
@@ -101,13 +94,9 @@ const ConnectedRouterWithContext = props => {
 
   return (
     <Context.Consumer>
-      {({ store }) => <ConnectedRouter store={store} {...props} />}
+      {({ store }: ReactReduxContextValue) => <ConnectedRouter store={store} {...props} />}
     </Context.Consumer>
   );
-};
-
-ConnectedRouterWithContext.propTypes = {
-  context: PropTypes.object,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ConnectedRouterWithContext);
